@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use List::Util qw( sum );
 
 # Arguments
 my ($solution_number, @args) = @ARGV;
@@ -38,7 +39,7 @@ sub solution1 {
 
     # Finding all matching digits and sum
     my @captured = $input =~ m/(\d)(?=\1)/g;
-    my $sum = sum_digits(@captured);
+    my $sum = sum(@captured);
 
     print "====================\n";
     print "Solution #1: $sum\n";
@@ -55,22 +56,9 @@ sub solution2 {
     # Finding all matching digits and sum
     my $pattern = '(\d)(?=\d{' . (length($data) / 2 - 1) . '}\1)';
     my @captured = $input =~ m/$pattern/g;
-    my $sum = sum_digits(@captured);
+    my $sum = sum(@captured);
 
     print "====================\n";
     print "Solution #2: $sum\n";
     print "====================\n";
-}
-
-###########################################
-
-sub sum_digits {
-    my (@digits) = @_;
-
-    my $sum = 0;
-    foreach(@digits) {
-        $sum += int($_);
-    }
-
-    return $sum;
 }
